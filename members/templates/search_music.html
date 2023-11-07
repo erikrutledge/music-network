@@ -6,8 +6,17 @@
   <h1>Search For Music</h1>
 
   {% if user.is_authenticated %}
-    Hi {{ user.username }}!
-    There will be content here to search for music.
+    <form action="../static/scripts/search_song_title.py">
+      <label for="searchbar">Search by Song Title</label>
+      <input id="searchbar" type="text">
+      <input type="submit" value="Search For Song">
+    </form>
+
+    <div id="search_response">
+      
+
+    </div>
+    
 
   {% else %}
     <p>You are not logged in</p>

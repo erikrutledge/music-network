@@ -7,6 +7,23 @@
 
   {% if user.is_authenticated %}
     Hi {{ user.username }}!
+    <div id="user_tracks">
+    <p>Here are your saved tracks:</p>
+      {% if not tracks %}
+        <div id="track_object">
+          <p>There's nothing here!</p>
+          <p>Click <a href="{% url 'music' %}">here</a> to discover and add music.</p>
+        </div>
+      {% else %}
+        {% for track in tracks %}
+          <div id="track_object">
+            <a href="{{ track.url }}"> <img src="{{ track.img }}"></a>
+            <p>{{ track.title }}</p>
+            <p>{{ track.artist }}</p>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
 
   {% else %}
     <p>You are not logged in</p>

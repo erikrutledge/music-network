@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.template import loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .models import Track
 
 def landing(request):
     return render(request, 'landing.html')
@@ -44,7 +44,8 @@ def signup_user(request):
     return render(request, 'authenticate/signup.html', {'form': form})
 
 def home(request):
-    return render(request, 'home.html')
+    data = Track.objects.all()
+    return render(request, 'home.html', {'tracks': data})
 
 def search_friends(request):
     return render(request, 'search_friends.html')
