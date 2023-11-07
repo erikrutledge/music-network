@@ -8,8 +8,8 @@ class SpotifyAPI():
         """
         Use the client and secret ids to request an access token
         """
-        CLIENT_ID = 'b247b475d86743e7893e25affc373756'
-        CLIENT_SECRET = '680d898c61584cd7bd18d905ac8f8019'
+        CLIENT_ID = ''
+        CLIENT_SECRET = ''
         AUTH_URL = 'https://accounts.spotify.com/api/token'
 
         auth_response = requests.post(AUTH_URL, {
