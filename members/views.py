@@ -45,3 +45,9 @@ def signup_user(request):
 
 def home(request):
     return render(request, 'home.html')
+
+def search_friends(request):
+    return render(request, 'search_friends.html')
+
+def search_music(request):
+    return render(request, 'search_music.html')

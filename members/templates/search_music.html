@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Music Search{% endblock %}
+
+{% block content %}
+  <h1>Search For Music</h1>
+
+  {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    There will be content here to search for music.
+
+  {% else %}
+    <p>You are not logged in</p>
+    <p>Please <a href="{% url 'login' %}">Log In</a> to continue.</p>
+  {% endif %}
+
+{% endblock %}
