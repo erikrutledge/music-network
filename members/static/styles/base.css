@@ -8,6 +8,21 @@
     --white: #D4CCC4;
 }
 
+
+
+/* GENERAL FORMATTING */
+body { 
+    background-color: var(--gray);
+    color: var(--white);
+    font-family: 'Glory', sans-serif;
+}
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+
+
 /* NAVIGATION BAR */
 #navbar {
     position: fixed;
@@ -58,21 +73,36 @@
 }
 
 
-body { 
-    background-color: var(--gray);
-    color: var(--white);
-    font-family: 'Glory', sans-serif;
+
+/* LOGIN - SIGNUP PAGE FORMATTING */
+.login-form {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+.login-form input {
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    border-radius: 320px;
+    padding: 13px;
+    margin: 10px;
+    text-shadow: 1px 1px 0 var(--white);
 }
 
-a {
-    text-decoration: none;
-    color: var(--white);
+.signup-form {
+    position: absolute;
+    top: 30%;
+    left: 40%;
 }
-
-.content {
-    background-color: var(--gray);
-    color: var(--white);
-    font-family: 'Glory', sans-serif;
-    margin-top: 160px;
-    text-align: center;
+.helptext {
+    visibility: hidden;
+}
+.signup-form ul li {
+    display: none;
+}
+.error-message {
+    position: absolute;
+    top: 10%;
+    left: 40%;
 }

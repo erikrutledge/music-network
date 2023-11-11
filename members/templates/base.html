@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>{% block title %}Base Page{% endblock %}</title>
-  <link rel="stylesheet" href="../static/styles/base.css">
+  <link rel="stylesheet" href="/static/styles/base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Glory&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
       <div class="red-stripe"></div>
       <div class="nav-wrapper">
         <div class="logo">
-          <a href="{% url 'home' %}"><img src="../static/images/ll-logo.png"></a>
+          <a href="{% url 'home' %}"><img src="/static/images/ll-logo.png"></a>
         </div>
         {% if user.is_authenticated %}
           <ul id="menu">
