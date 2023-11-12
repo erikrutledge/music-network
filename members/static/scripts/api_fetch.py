@@ -1,5 +1,7 @@
 import requests
 import json
+import constants
+from pprint import pprint
 
 class SpotifyAPI():
     """ methods relating to GET and POST calls made to the spotify API."""
@@ -8,8 +10,8 @@ class SpotifyAPI():
         """
         Use the client and secret ids to request an access token
         """
-        CLIENT_ID = 'b247b475d86743e7893e25affc373756'
-        CLIENT_SECRET = '680d898c61584cd7bd18d905ac8f8019'
+        CLIENT_ID = constants.CLIENT_ID
+        CLIENT_SECRET = constants.CLIENT_SECRET
         AUTH_URL = 'https://accounts.spotify.com/api/token'
 
         auth_response = requests.post(AUTH_URL, {
@@ -18,6 +20,7 @@ class SpotifyAPI():
             'client_secret': CLIENT_SECRET,
         })
         response_data = auth_response.json()
+        pprint(response_data)
         access_token = response_data['access_token']
         # print(access_token)
         return access_token

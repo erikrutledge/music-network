@@ -9,3 +9,6 @@ class Track(models.Model):
     url = models.URLField(max_length=200)
     img = models.URLField(max_length=200)
 
+class Friends(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+

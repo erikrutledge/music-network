@@ -4,14 +4,21 @@
 
 {% block content %}
   <h1>Search For Friends</h1>
-
   {% if user.is_authenticated %}
-    Hi {{ user.username }}!
-    There will be content here to search for friends.
+    <input type="textbox" id="query" onkeyup="consoleLogSomething()" placeholder="Search for users"></input>
+
+    <ul id="user-list">
+      {% for user in users %}
+        <li id="user-item">
+          <label for="{{ user.username }}" class="toggle-button" value="true">{{ user.username }}</label>
+          <input type="checkbox" class="friend-toggle" id="{{ user.username }}">
+        </li>
+      {% endfor %}
+      </ul>
 
   {% else %}
     <p>You are not logged in</p>
-    <p>Please <a href="{% url 'login' %}">Log In</a> to continue.</p>
+    <p>Please <a href="{% url 'login' %}">Login</a> to continue.</p>
   {% endif %}
-
+  <script type="text/javascript" src="/static/scripts/base.js"></script>
 {% endblock %}

@@ -1,0 +1,2 @@
+# ignore the constant file holding api secrets
+constants.py
