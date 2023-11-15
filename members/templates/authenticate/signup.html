@@ -4,7 +4,7 @@
 
 {% block content %}
   {% if form.errors %}
-    <p class="error-message">There was an error with your form.</p>
+    <p class="error-message">There was an error with your form. Please try again.</p>
   {% endif %}
 
   <form class="signup-form" action="{% url 'signup' %}" method=POST>
