@@ -1,26 +1,24 @@
 :root {
-    --yellow: #F4E285;
-    --orange: #F4A259;
-    --red: #BC4B51;
-    --blue: #0081AF;
-    --gray: #342E37;
-    --black: #151316;
-    --white: #D4CCC4;
+    --white: #CDDFD1;
+    --lightgreen: #A8C7AE;
+    --green: #48704F;
+    --darkgreen: #283E2C;
+    --black: #18251B;
 }
 
 
 
 /* GENERAL FORMATTING */
 body { 
-    background-color: var(--gray);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--black);
     font-family: 'Glory', sans-serif;
     text-align: center;
     margin-top: 120px;
 }
 a {
     text-decoration: none;
-    color: var(--white);
+    color: var(--darkgreen);
 }
 
 
@@ -63,7 +61,7 @@ a {
 }
 
 #navbar li a {
-    color: var(--white);
+    color: var(--black);
     display: block;
     font-size: 1.25em;
     height: 50px;
@@ -89,7 +87,7 @@ a {
     border-radius: 320px;
     padding: 13px;
     margin: 10px;
-    text-shadow: 1px 1px 0 var(--white);
+    text-shadow: 1px 1px 0 var(--black);
 }
 
 

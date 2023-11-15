@@ -48,8 +48,9 @@ def signup_user(request):
 
 
 def home(request):
-    data = Track.objects.filter(username = request.user)
-    return render(request, 'home.html', {'tracks': data})
+    # tracks = Track.objects.filter(username = request.user)
+    profile = Profile.objects.filter(user = request.user)
+    return render(request, 'home.html', {'profile': profile})
 
 def search_friends(request):
     User = get_user_model()
@@ -60,7 +61,6 @@ def search_music(request):
     search_query = request.GET.get('search_query', None)
     if search_query:
         response = index.getTrack(search_query)
-
         return render(request, 'search_music.html', {'tracks': response})
     else:
         return render(request, 'music_landing.html')
