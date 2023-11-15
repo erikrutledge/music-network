@@ -1,4 +1,4 @@
-from api_fetch import SpotifyAPI
+from .api_fetch import SpotifyAPI
 
 def getTrack(user_query):
         headers = SpotifyAPI.get_headers(SpotifyAPI.get_access_token())

@@ -1,7 +1,7 @@
 import requests
 import json
-import constants
-from pprint import pprint
+from . import constants
+# from pprint import pprint
 
 class SpotifyAPI():
     """ methods relating to GET and POST calls made to the spotify API."""
@@ -20,7 +20,7 @@ class SpotifyAPI():
             'client_secret': CLIENT_SECRET,
         })
         response_data = auth_response.json()
-        pprint(response_data)
+        # pprint(response_data)
         access_token = response_data['access_token']
         # print(access_token)
         return access_token

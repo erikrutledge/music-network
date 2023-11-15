@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Track
-from .static.scripts import index
+from .models import Track, Profile
+from . import index
 
 def landing(request):
     return render(request, 'landing.html')
@@ -44,8 +44,11 @@ def signup_user(request):
 
     return render(request, 'authenticate/signup.html', {'form': form})
 
+
+
+
 def home(request):
-    data = Track.objects.all()
+    data = Track.objects.filter(username = request.user)
     return render(request, 'home.html', {'tracks': data})
 
 def search_friends(request):
@@ -54,8 +57,10 @@ def search_friends(request):
     return render(request, 'search_friends.html', {'users': data})
 
 def search_music(request):
-    search_query = request.GET['search_query']
-    response = index.getTrack(search_query)
+    search_query = request.GET.get('search_query', None)
+    if search_query:
+        response = index.getTrack(search_query)
 
-
-    return render(request, 'search_music.html')
+        return render(request, 'search_music.html', {'tracks': response})
+    else:
+        return render(request, 'music_landing.html')
