@@ -3,15 +3,27 @@
 {% block title %}Friend Search{% endblock %}
 
 {% block content %}
-  <h1>Search For Friends</h1>
-
+  <h1>Find Friends</h1>
   {% if user.is_authenticated %}
-    Hi {{ user.username }}!
-    There will be content here to search for friends.
+    <form method="get" action="{% url 'friends' %}">
+      <input type="text" name="q" value="{{ search_query }}" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
+
+    <ul>
+      {% for user in users %}
+        <li>
+          <p>{{ user }}</p>
+          <form method="post" action="{% url 'add_friend' user.id %}">
+            {% csrf_token %}
+            <button type="submit">Add Friend</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
 
   {% else %}
     <p>You are not logged in</p>
-    <p>Please <a href="{% url 'login' %}">Log In</a> to continue.</p>
+    <p>Please <a href="{% url 'login' %}">Login</a> to continue.</p>
   {% endif %}
-
 {% endblock %}

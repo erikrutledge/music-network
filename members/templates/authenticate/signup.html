@@ -3,17 +3,14 @@
 {% block title %}Signup Page{% endblock %}
 
 {% block content %}
-
   {% if form.errors %}
-    <p>There was an error with your form.</p>
+    <p class="error-message">There was an error with your form. Please try again.</p>
   {% endif %}
 
-  <h1>Welcome to the Signup Screen</h1>
-
-  <form action="{% url 'signup' %}" method=POST>
+  <form class="signup-form" action="{% url 'signup' %}" method=POST>
     {% csrf_token %}
     
-    {{ form }}
+    {{ form.as_p }}
   
     <input type="submit" value="Submit">
 {% endblock %}

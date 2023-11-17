@@ -5,21 +5,47 @@
 {% block content %}
   <h1>Welcome to the Home Screen</h1>
 
+
   {% if user.is_authenticated %}
-    Hi {{ user.username }}!
+    {{ user.username }}
     <div id="user_tracks">
-    <p>Here are your saved tracks:</p>
-      {% if not tracks %}
-        <div id="track_object">
-          <p>There's nothing here!</p>
-          <p>Click <a href="{% url 'music' %}">here</a> to discover and add music.</p>
-        </div>
+      <p>Here are your saved tracks:</p>
+        {% if not user.profile.tracks.all %}
+          <p>There's nothing here! <a href="{% url 'music' %}">Click here to discover and add music.</a></p>
+        {% else %}
+          {% for track in user.profile.tracks.all %}
+            <div id="track_object">
+              <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}"></a>
+              <p>{{ track.title }}</p>
+              <p>{{ track.artist }}</p>
+              <form method="post" action="{% url 'remove_track' track.id %}">
+                {% csrf_token %}
+                <button type="submit">Remove Track</button>
+              </form>
+            </div>
+          {% endfor %}
+        {% endif %}
+    </div>
+
+    <div id="friend_tracks">
+      <p>Here are your friend's tracks:</p>
+      {% if not user.profile.friends.all %}
+        <p>You haven't followed anyone yet! <a href="{% url 'friends' %}">Click here to find and make friends.</a></p>
       {% else %}
-        {% for track in tracks %}
-          <div id="track_object">
-            <a href="{{ track.url }}"> <img src="{{ track.img }}"></a>
-            <p>{{ track.title }}</p>
-            <p>{{ track.artist }}</p>
+        {% for friend in user.profile.friends.all %}
+          <div id="friend_object">
+            <p>{{ friend.username }}</p>
+            <form method="post" action="{% url 'remove_friend' friend.id %}">
+              {% csrf_token %}
+              <button type="submit">Remove Friend</button>
+            </form>
+            {% for track in friend.profile.tracks.all %}
+              <div id="track_object">
+                <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}"></a>
+                <p>{{ track.title }}</p>
+                <p>{{ track.artist }}</p>
+              </div>
+            {% endfor %}
           </div>
         {% endfor %}
       {% endif %}

@@ -1,0 +1,111 @@
+:root {
+    --white: #CDDFD1;
+    --lightgreen: #A8C7AE;
+    --green: #48704F;
+    --darkgreen: #283E2C;
+    --black: #18251B;
+}
+
+
+
+/* GENERAL FORMATTING */
+body { 
+    background-color: var(--white);
+    color: var(--black);
+    font-family: 'Glory', sans-serif;
+    text-align: center;
+    margin-top: 120px;
+}
+a {
+    text-decoration: none;
+    color: var(--darkgreen);
+}
+
+
+
+/* NAVIGATION BAR */
+#navbar {
+    position: fixed;
+    top: 20px;
+    height: 60px;
+    line-height: 60px;
+    width: 100vw;
+    z-index: 10;
+  }
+  
+.nav-wrapper {
+    margin: auto;
+    text-align: center;
+    width: 85%;
+} 
+
+.logo {
+    float: left;
+    margin-left: 28px;
+}
+
+.logo img {
+    height: 95px;
+}
+
+#navbar ul {
+    display: inline-block;
+    float: right;
+    list-style: none;
+    margin-top: -2px;
+    text-align: right;
+}
+
+#navbar li {
+    display: inline-block;
+}
+
+#navbar li a {
+    color: var(--black);
+    display: block;
+    font-size: 1.25em;
+    height: 50px;
+    letter-spacing: 1px;
+    margin: 0 20px;
+    padding: 0 4px;
+    position: relative;
+    text-decoration: none;
+}
+
+
+
+/* LOGIN - SIGNUP PAGE FORMATTING */
+.login-form {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+.login-form input {
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    border-radius: 320px;
+    padding: 13px;
+    margin: 10px;
+    text-shadow: 1px 1px 0 var(--black);
+}
+
+
+.signup-form {
+    text-align: left;
+    left: 40%;
+}
+.helptext {
+    visibility: hidden;
+}
+.signup-form ul li {
+    display: none;
+}
+.error-message {
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    color: #BC4B51;
+}
+
+/* SEARCH FRIENDS PAGE */

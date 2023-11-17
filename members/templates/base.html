@@ -2,19 +2,33 @@
 <html>
 <head>
   <title>{% block title %}Base Page{% endblock %}</title>
+  <link rel="stylesheet" href="/static/styles/base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Glory&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="navbar">
-    <nav>
-          {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-            <a class="nav-item nav-link" href="{% url 'music' %}">Discover Music</a>
-            <a class="nav-item nav-link" href="{% url 'friends' %}">Find Friends</a>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-          {% else %}
-            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-            <a class="nav-item nav-link" href="{% url 'signup' %}">Signup</a>
-          {% endif %}
+    <nav id="navbar" class="">
+      <div class="red-stripe"></div>
+      <div class="nav-wrapper">
+        <div class="logo">
+          <a href="{% url 'home' %}"><img src="/static/images/ll-logo.png"></a>
+        </div>
+        {% if user.is_authenticated %}
+          <ul id="menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'music' %}">Music</a></li>
+            <li><a href="{% url 'friends' %}">Friends</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        {% else %}
+          <ul id="menu">
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+          </ul>
+        {% endif %}
+      </div>      
     </nav>
   </div>
   <div class="container">
@@ -24,8 +38,9 @@
       {% endfor %}
     {% endif %}
   </div>
-{% block content %}
-{% endblock %}
-
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
 </html>

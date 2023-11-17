@@ -3,20 +3,31 @@
 {% block title %}Music Search{% endblock %}
 
 {% block content %}
-  <h1>Search For Music</h1>
+  <h1>Discover Music</h1>
 
   {% if user.is_authenticated %}
-    <form action="../static/scripts/search_song_title.py">
-      <label for="searchbar">Search by Song Title</label>
-      <input id="searchbar" type="text">
-      <input type="submit" value="Search For Song">
+    <form method="get" action="{% url 'music' %}">
+      <input type="text" name="q" placeholder="Search">
+      <button type="submit">Search</button>
     </form>
 
-    <div id="search_response">
-      
+    <ul>
+      {% for key, value in response.items %}
+        <li>
+          <a href="{{ value.url }}"><img src="{{ value.img }}"></a>
+          {{value.name}} by {{ value.artist }}
+          <form method="post" action="{% url 'save_track' %}">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="{{ value.name }}">
+            <input type="hidden" name="artist" value="{{ value.artist }}">
+            <input type="hidden" name="img" value="{{ value.img }}">
+            <input type="hidden" name="url" value="{{ value.url }}">
+            <button type="submit">Save To Playlist</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
 
-    </div>
-    
 
   {% else %}
     <p>You are not logged in</p>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Music Landing{% endblock %}
+
+{% block content %}
+  <h1>Discover Music</h1>
+
+  {% if user.is_authenticated %}
+    <form method="get" action="{% url 'music' %}">
+      <input type="text" name="q" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
+
+    <p>MUSIC HIGHLIGHTS AND TRENDING TOPICS WILL BE HERE</p>
+  {% else %}
+    <p>You are not logged in</p>
+    <p>Please <a href="{% url 'login' %}">Log In</a> to continue.</p>
+  {% endif %}
+
+{% endblock %}
