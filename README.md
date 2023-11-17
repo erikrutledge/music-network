@@ -15,13 +15,13 @@ This app uses the Spotify API when to search for tracks which requires a Spotify
 
 ## Functionality
 Fully Implemented Features:
-*
+* tbd
 
 Future Features
-*
+* tbd
 
 Known Bugs
-*
+* tbd
 
 ---
 
