@@ -14,7 +14,7 @@
           <p>{{ track.artist }}</p>
           <form method="post" action="{% url 'remove_track' track.id %}">
             {% csrf_token %}
-            <button type="submit">Remove Track</button>
+            <button type="submit">Delete</button>
           </form>
         </div>
       {% endfor %}
@@ -48,7 +48,7 @@
                     <input type="hidden" name="artist" value="{{ track.artist }}">
                     <input type="hidden" name="img" value="{{ track.img }}">
                     <input type="hidden" name="url" value="{{ track.url }}">
-                    <button type="submit">Save Track</button>
+                    <button type="submit">Save</button>
                   </form>
                 </div>
               {% endfor %}

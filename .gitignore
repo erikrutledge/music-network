@@ -1,2 +1,10 @@
 # ignore the constant file holding api secrets
 constants.py
+# ignore these for hosting purposes
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+staticfiles
