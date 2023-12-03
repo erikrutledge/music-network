@@ -3,24 +3,36 @@
 {% block title %}Music Search{% endblock %}
 
 {% block content %}
-  <h1>Search For Music</h1>
+  <h1>Discover Music</h1>
 
   {% if user.is_authenticated %}
-    <form method="get" action="{% url 'music' %}">
-      <input id="music-search" type="text" name="search_query">
+    <div id="search_bar">
+      <form method="get" action="{% url 'music' %}">
+        <input type="text" name="q" placeholder="Search">
+        <button type="submit">Search</button>
+      </form><br>
+    </div>
 
-    </form>
-    <ul id="song-list">
-      {% for key, value in tracks.items %}
-        <li>
-          <a href="{{ value.url }}" target="_blank">
-            <img src="{{ value.img }}">
-            <p>{{ value.name }}</p>
-            <p>{{ value.artist }}</p>
-          </a>
-        </li>
+    <p>Showing results for '{{ search_query }}' :</p> 
+
+
+    <div id="search_tracks">
+      {% for key, value in response.items %}
+        <div id="track_result">
+          <a href="{{ value.url }}"><img src="{{ value.img }}" width="180" alt="Album cover art for song {{ value.name }}"></a>
+          <p>{{value.name}} by {{ value.artist }}</p>
+          <form method="post" action="{% url 'save_track' %}">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="{{ value.name }}">
+            <input type="hidden" name="artist" value="{{ value.artist }}">
+            <input type="hidden" name="img" value="{{ value.img }}">
+            <input type="hidden" name="url" value="{{ value.url }}">
+            <button type="submit">Save Track</button>
+          </form>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
+
 
   {% else %}
     <p>You are not logged in</p>

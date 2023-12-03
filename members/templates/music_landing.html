@@ -3,14 +3,17 @@
 {% block title %}Music Landing{% endblock %}
 
 {% block content %}
-  <h1>Search For Music</h1>
+  <h1>Discover Music</h1>
 
   {% if user.is_authenticated %}
-    <form method="get" action="{% url 'music' %}">
-      <input id="music-search" type="text" name="search_query">
-    </form>
-    <ul id="song-list"></ul>
+    <div id="search_bar">
+      <form method="get" action="{% url 'music' %}">
+        <input type="text" name="q" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+    </div>
 
+    <p>MUSIC HIGHLIGHTS AND TRENDING TOPICS WILL BE HERE</p>
   {% else %}
     <p>You are not logged in</p>
     <p>Please <a href="{% url 'login' %}">Log In</a> to continue.</p>
