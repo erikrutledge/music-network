@@ -21,7 +21,7 @@ def login_user(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.success(request, ("There was an error logging in. Please try again."))
+            messages.error(request, ("There was an error logging in. Please try again."))
             return redirect('login')
     else:
         return render(request, 'authenticate/login.html')
@@ -56,18 +56,17 @@ def home(request):
 
 def search_friends(request):
     context = {}
-    User = get_user_model()
     search_query = request.GET.get('q')
 
     current_user_profile = Profile.objects.get(user=request.user)  
     user_friends = current_user_profile.friends.all()
 
     if search_query:
-        users = Profile.objects.filter(Q(username__icontains=search_query) & ~Q(user__in=user_friends)).exclude(pk=request.user.id)
+        users = Profile.objects.filter(Q(user__username__icontains=search_query) & ~Q(user__in=user_friends)).exclude(pk=request.user.id)
     else:
         users = Profile.objects.exclude(pk=request.user.id).exclude(user__in=user_friends)
     context['users'] = users
-    context['query'] = search_query
+    context['search_query'] = search_query
 
     return render(request, 'search_friends.html', context)
 
@@ -79,7 +78,7 @@ def add_friend(request, friend_id):
     current_user_profile = Profile.objects.get(user=request.user)
     current_user_profile.friends.add(friend)
     current_user_profile.save()
-
+    messages.success(request, ("Friend successfully added."))
     return redirect('home')
 
 def remove_friend(request, friend_id):
@@ -91,7 +90,7 @@ def remove_friend(request, friend_id):
     current_user_profile = Profile.objects.get(user=request.user)
     current_user_profile.friends.remove(friend)
     current_user_profile.save()
-
+    messages.success(request, ("Friend successfully removed."))
     return redirect('home')
 
 
@@ -102,7 +101,7 @@ def search_music(request):
     if search_query:
         response = index.getTrack(search_query)
         context['response'] = response
-        context['query'] = search_query
+        context['search_query'] = search_query
 
         return render(request, 'search_music.html', context)
 
@@ -134,7 +133,8 @@ def save_track(request):
         current_user_profile = Profile.objects.get(user=request.user)
         current_user_profile.tracks.add(track_object)
         current_user_profile.save()
-        
+    
+    messages.success(request, ("Track added."))
     return redirect('home')
 
 def remove_track(request, track_id):
@@ -143,5 +143,5 @@ def remove_track(request, track_id):
 
     current_user_profile.tracks.remove(track)
     current_user_profile.save()
-
+    messages.success(request, ("Track removed."))
     return redirect('home')

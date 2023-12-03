@@ -3,52 +3,74 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-  <h1>Welcome to the Home Screen</h1>
-
 
   {% if user.is_authenticated %}
-    {{ user.username }}
+  <h1>{{ user.profile }}'s Tracks</h1>
     <div id="user_tracks">
-      <p>Here are your saved tracks:</p>
-        {% if not user.profile.tracks.all %}
-          <p>There's nothing here! <a href="{% url 'music' %}">Click here to discover and add music.</a></p>
-        {% else %}
-          {% for track in user.profile.tracks.all %}
-            <div id="track_object">
-              <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}"></a>
-              <p>{{ track.title }}</p>
-              <p>{{ track.artist }}</p>
-              <form method="post" action="{% url 'remove_track' track.id %}">
-                {% csrf_token %}
-                <button type="submit">Remove Track</button>
-              </form>
-            </div>
-          {% endfor %}
-        {% endif %}
+      {% for track in user.profile.tracks.all %}
+        <div id="track_object">
+          <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}" width="165"></a>
+          <p>{{ track.title }}</p>
+          <p>{{ track.artist }}</p>
+          <form method="post" action="{% url 'remove_track' track.id %}">
+            {% csrf_token %}
+            <button type="submit">Remove Track</button>
+          </form>
+        </div>
+      {% endfor %}
+      
+      <div id="track_object">
+        <a href="{% url 'music' %}"><img class="add_music" src="/static/images/add_icon.png" width="100"></a>
+      </div>
     </div>
 
     <div id="friend_tracks">
-      <p>Here are your friend's tracks:</p>
+      <h1>Friend Tracks</h1>
       {% if not user.profile.friends.all %}
-        <p>You haven't followed anyone yet! <a href="{% url 'friends' %}">Click here to find and make friends.</a></p>
+        <h3>You haven't followed anyone yet! Click <a href="{% url 'friends' %}">HERE</a> to find and make friends.</h3>
       {% else %}
         {% for friend in user.profile.friends.all %}
-          <div id="friend_object">
-            <p>{{ friend.username }}</p>
+          {% if friend.profile.tracks.all %}
             <form method="post" action="{% url 'remove_friend' friend.id %}">
               {% csrf_token %}
-              <button type="submit">Remove Friend</button>
+              <h2>{{ friend.username }}</h2>
+              <button id="remove_button" type="submit">Remove Friend</button>
             </form>
-            {% for track in friend.profile.tracks.all %}
-              <div id="track_object">
-                <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}"></a>
-                <p>{{ track.title }}</p>
-                <p>{{ track.artist }}</p>
-              </div>
-            {% endfor %}
-          </div>
+            <div id="friend_object">
+              {% for track in friend.profile.tracks.all %}
+                <div id="track_object">
+                  <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}"></a>
+                  <p>{{ track.title }}</p>
+                  <p>{{ track.artist }}</p>
+                  <form method="post" action="{% url 'save_track' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="title" value="{{ track.title }}">
+                    <input type="hidden" name="artist" value="{{ track.artist }}">
+                    <input type="hidden" name="img" value="{{ track.img }}">
+                    <input type="hidden" name="url" value="{{ track.url }}">
+                    <button type="submit">Save Track</button>
+                  </form>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <form method="post" action="{% url 'remove_friend' friend.id %}">
+              {% csrf_token %}
+              <h1>{{ friend.username }}</h1>
+              <button id="remove_button" type="submit">Remove Friend</button>
+            </form>
+            <div id="empty_friend">
+              <h2>Yikes, {{ friend.username }} hasn't saved any tracks yet</h2>
+              <p>Remind them to stop gatekeeping and share their new tunes</p>
+            </div><br>
+          {% endif %}
         {% endfor %}
       {% endif %}
+    </div>
+    <div class="no_friends">
+      <br><br><br><br>
+      <h2>Still haven't found anything that you vibe with?</h2>
+      <h3>Try sharing Lyric Link with friends or make new ones <a href="{% url 'friends' %}">HERE</a></h3>
     </div>
 
   {% else %}

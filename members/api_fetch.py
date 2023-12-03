@@ -52,7 +52,7 @@ class SpotifyAPI():
                 'name': track['name'],
                 'artist': track['artists'][0]['name'],
                 'url': 'https://open.spotify.com/track/' + track['id'],
-                'img': track['album']['images'][-1]['url']
+                'img': track['album']['images'][0]['url']
             }
         return tracks
 

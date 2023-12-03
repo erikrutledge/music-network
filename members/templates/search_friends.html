@@ -5,22 +5,28 @@
 {% block content %}
   <h1>Find Friends</h1>
   {% if user.is_authenticated %}
-    <form method="get" action="{% url 'friends' %}">
-      <input type="text" name="q" value="{{ search_query }}" placeholder="Search">
-      <button type="submit">Search</button>
-    </form>
+    <div id="search_bar">
+      <form method="get" action="{% url 'friends' %}">
+        <input type="text" name="q" placeholder="Search">
+        <button type="submit">Find Friends</button>
+      </form>
+    </div>
+    {% if search_query %}
+      <p>Showing results for '{{ search_query }}'</p> 
+    {% endif %}
+    
 
-    <ul>
+    <div id="search_friends">
       {% for user in users %}
-        <li>
+        <div id="friend_result">
           <p>{{ user }}</p>
           <form method="post" action="{% url 'add_friend' user.id %}">
             {% csrf_token %}
             <button type="submit">Add Friend</button>
           </form>
-        </li>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
 
   {% else %}
     <p>You are not logged in</p>

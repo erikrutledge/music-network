@@ -9,11 +9,11 @@
 </head>
 <body>
   <div class="navbar">
-    <nav id="navbar" class="">
-      <div class="red-stripe"></div>
+    <nav id="navbar">
       <div class="nav-wrapper">
         <div class="logo">
           <a href="{% url 'home' %}"><img src="/static/images/ll-logo.png"></a>
+          <a href="{% url 'home' %}">Lyric Link</a>
         </div>
         {% if user.is_authenticated %}
           <ul id="menu">

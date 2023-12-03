@@ -4,13 +4,29 @@
 
 {% block content %}
   {% if form.errors %}
-    <p class="error-message">There was an error with your form. Please try again.</p>
+    <p class="error-message">{{ form.message.errors }}</p>
   {% endif %}
 
   <form class="signup-form" action="{% url 'signup' %}" method=POST>
     {% csrf_token %}
     
-    {{ form.as_p }}
-  
-    <input type="submit" value="Submit">
+    <!-- <div class="signup-wrapper">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+    <div class="signup-wrapper">
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+    </div>
+    <div class="signup-wrapper">
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+    </div> -->
+    <div class="signup-wrapper">
+      <input type="text" placeholder="Username" name="username"><br>
+      <input type="password" placeholder="Password" name="password1"><br>
+      <input type="password" placeholder="Confirm Password" name="password2"><br>
+      <input class="signup-button" type="submit" value="Signup">
+    </div>
+    
 {% endblock %}

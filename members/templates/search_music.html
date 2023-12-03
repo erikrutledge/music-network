@@ -6,27 +6,32 @@
   <h1>Discover Music</h1>
 
   {% if user.is_authenticated %}
-    <form method="get" action="{% url 'music' %}">
-      <input type="text" name="q" placeholder="Search">
-      <button type="submit">Search</button>
-    </form>
+    <div id="search_bar">
+      <form method="get" action="{% url 'music' %}">
+        <input type="text" name="q" placeholder="Search">
+        <button type="submit">Search</button>
+      </form><br>
+    </div>
 
-    <ul>
+    <p>Showing results for '{{ search_query }}' :</p> 
+
+
+    <div id="search_tracks">
       {% for key, value in response.items %}
-        <li>
-          <a href="{{ value.url }}"><img src="{{ value.img }}"></a>
-          {{value.name}} by {{ value.artist }}
+        <div id="track_result">
+          <a href="{{ value.url }}"><img src="{{ value.img }}" width="180" alt="Album cover art for song {{ value.name }}"></a>
+          <p>{{value.name}} by {{ value.artist }}</p>
           <form method="post" action="{% url 'save_track' %}">
             {% csrf_token %}
             <input type="hidden" name="title" value="{{ value.name }}">
             <input type="hidden" name="artist" value="{{ value.artist }}">
             <input type="hidden" name="img" value="{{ value.img }}">
             <input type="hidden" name="url" value="{{ value.url }}">
-            <button type="submit">Save To Playlist</button>
+            <button type="submit">Save Track</button>
           </form>
-        </li>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
 
 
   {% else %}

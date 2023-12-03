@@ -6,10 +6,12 @@
   <h1>Discover Music</h1>
 
   {% if user.is_authenticated %}
-    <form method="get" action="{% url 'music' %}">
-      <input type="text" name="q" placeholder="Search">
-      <button type="submit">Search</button>
-    </form>
+    <div id="search_bar">
+      <form method="get" action="{% url 'music' %}">
+        <input type="text" name="q" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+    </div>
 
     <p>MUSIC HIGHLIGHTS AND TRENDING TOPICS WILL BE HERE</p>
   {% else %}
