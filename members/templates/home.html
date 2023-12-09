@@ -6,7 +6,9 @@
 
   {% if user.is_authenticated %}
   <h1>{{ user.profile }}'s Tracks</h1>
+  <h1>{{ user.profile }}'s Tracks</h1>
     <div id="user_tracks">
+      {% for track in user.profile.tracks.all %}
       {% for track in user.profile.tracks.all %}
         <div id="track_object">
           <a target="_blank" href="{{ track.url }}"> <img src="{{ track.img }}" width="165"></a>
@@ -17,6 +19,17 @@
             <button type="submit">Delete</button>
           </form>
         </div>
+      {% endfor %}
+      
+      <div id="track_object">
+        <a href="{% url 'music' %}"><img class="add_music" src="/static/images/add_icon.png" width="100"></a>
+      </div>
+    </div>
+
+    <div id="friend_tracks">
+      <h1>Friend Tracks</h1>
+      {% if not user.profile.friends.all %}
+        <h3>You haven't followed anyone yet! Click <a href="{% url 'friends' %}">HERE</a> to find and make friends.</h3>
       {% endfor %}
       
       <div id="track_object">
@@ -66,6 +79,11 @@
           {% endif %}
         {% endfor %}
       {% endif %}
+    </div>
+    <div class="no_friends">
+      <br><br><br><br>
+      <h2>Still haven't found anything that you vibe with?</h2>
+      <h3>Try sharing Lyric Link with friends or make new ones <a href="{% url 'friends' %}">HERE</a></h3>
     </div>
     <div class="no_friends">
       <br><br><br><br>
